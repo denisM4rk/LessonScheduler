@@ -1,0 +1,75 @@
+﻿<Page x:Class="LessonScheduler.Pages.EditLessonPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LessonScheduler.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Редактирование расписания">
+
+    <Grid Background="White">
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="30">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/login.png" Margin="5" Height="25"/>
+                            <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">День недели</TextBlock>
+                        </StackPanel>
+                        <ComboBox Name="CmbDay" Style="{StaticResource EditStyleComboBox}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/numbers.png" Margin="5" Height="25"/>
+                            <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Номер урока</TextBlock>
+                        </StackPanel>
+                        <TextBox Name="TxbNumber" Style="{StaticResource EditStyleTextBox}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/class.png" Margin="5" Height="25"/>
+                            <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Урок</TextBlock>
+                        </StackPanel>
+                        <TextBox Name="TxbLesson" Style="{StaticResource EditStyleTextBox}"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/numbers.png" Margin="5" Height="25"/>
+                            <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Номер кабинета</TextBlock>
+                        </StackPanel>
+                        <TextBox Name="TxbCabinet" Style="{StaticResource EditStyleTextBox}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="10" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/user.png" Margin="5" Height="25"/>
+                            <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Учитель</TextBlock>
+                        </StackPanel>
+                        <TextBox Name="TxbTeacher" Style="{StaticResource EditStyleTextBox}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="10" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/class2.png" Margin="5" Height="25"/>
+                            <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Класс</TextBlock>
+                        </StackPanel>
+                        <ComboBox Name="CmbClass" Style="{StaticResource EditStyleComboBox}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button Name="BtnEdit" VerticalAlignment="Bottom" Click="BtnEdit_Click" Style="{StaticResource Button}">Редактировать</Button>
+                <Button Name="BtnBack" VerticalAlignment="Bottom" Click="BtnBack_Click" Style="{StaticResource Button}">Назад</Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

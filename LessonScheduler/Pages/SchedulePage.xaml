@@ -1,0 +1,237 @@
+﻿<Page x:Class="LessonScheduler.Pages.SchedulePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LessonScheduler.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="900"
+      Title="Расписание занятий">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="5">
+            <Button Name="BtnHome" Click="BtnExit_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Вернуться на страницу авторизации
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/home.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Домой</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+
+            <TextBlock Style="{StaticResource EditStyleTextBlock}" Width="auto">Выберите класс:</TextBlock>
+            <ComboBox Style="{StaticResource FiltrationBox}" Width="50" Height="50" Name="CmbClass" SelectionChanged="CmbClass_SelectionChanged"></ComboBox>
+
+            <Separator/>
+
+            <Button Name="BtnEditFridayLesson" Click="BtnEditFridayLesson_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Вернуться на страницу авторизации
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/edit.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Ред. расписание</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+
+            <Button Name="BtnPlan" Click="BtnPlan_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Сформировать план для занятия
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/class.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Создать план</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+            
+            <Button Name="BtnEditPlan" Click="BtnEditPlan_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Редактировать план для занятия
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/edit.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Ред. план</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+
+
+            <TextBlock Name="TxbIdUser" Visibility="Hidden" Width="auto" Height="auto"></TextBlock>
+        </ToolBar>
+
+        <TabControl Grid.Row="1" Grid.ColumnSpan="5">
+            <TabItem Height="40" Header="Расписание">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <GroupBox Header="Понедельник" Grid.Column="0" Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+
+                            <DataGrid Name="GridMonday" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="GridMonday_SelectionChanged">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№" Binding="{Binding NumberOfLesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Урок" Binding="{Binding Lesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Кабинет" Binding="{Binding Cabinet}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Учитель" Binding="{Binding Users.Name}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+
+                        <GroupBox Header="Вторник" Grid.Column="1" Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+
+                            <DataGrid Name="GridTuesday" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="GridTuesday_SelectionChanged">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№" Binding="{Binding NumberOfLesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Урок" Binding="{Binding Lesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Кабинет" Binding="{Binding Cabinet}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Учитель" Binding="{Binding Users.Name}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+
+                        <GroupBox Header="Среда" Grid.Column="2" Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+
+                            <DataGrid Name="GridWednesday" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="GridWednesday_SelectionChanged">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№" Binding="{Binding NumberOfLesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Урок" Binding="{Binding Lesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Кабинет" Binding="{Binding Cabinet}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Учитель" Binding="{Binding Users.Name}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+
+                        <GroupBox Header="Четверг" Grid.Column="3"  Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+
+                            <DataGrid Name="GridThursday" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="GridThursday_SelectionChanged">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№" Binding="{Binding NumberOfLesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Урок" Binding="{Binding Lesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Кабинет" Binding="{Binding Cabinet}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Учитель" Binding="{Binding Users.Name}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+
+                        <GroupBox Header="Пятница" Grid.Column="4"  Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+
+                            <DataGrid Name="GridFriday" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="GridFriday_SelectionChanged">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№" Binding="{Binding NumberOfLesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Урок" Binding="{Binding Lesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Кабинет" Binding="{Binding Cabinet}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Учитель" Binding="{Binding Users.Name}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Name="TbPlans" Header="Мои планы">
+                <DataGrid Name="GridPlans" SelectionChanged="GridPlans_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn FontSize="15" Header="Предмет" Width="auto" Binding="{Binding Lessons.Lesson}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Тема занятия" Width="auto" Binding="{Binding LessonTopic}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Тип занятия" Width="auto" Binding="{Binding LessonType}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Материалы" Width="auto" Binding="{Binding LessonMaterials}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Деятельность учеников" Width="auto" Binding="{Binding StudentsActivity}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Деятельность учителя" Width="auto" Binding="{Binding TeacherActivity}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>
