@@ -27,24 +27,29 @@ namespace LessonScheduler.Pages
         {
             InitializeComponent();
 
-            this.lessons = selectedLessons;
-            if (lessons != null)
-            {
-                TxbCabinet.Text = Convert.ToString(lessons.Cabinet);
-                TxbLesson.Text = lessons.Lesson;
-                TxbTeacher.Text = Convert.ToString(lessons.IdTeacher);
-                TxbNumber.Text = Convert.ToString(lessons.NumberOfLesson);
-                CmbClass.Text = Convert.ToString(lessons.IdClass);
-                CmbDay.Text = Convert.ToString(lessons.IdDay);
-            }
-
             CmbDay.ItemsSource = DbConnect.entObj.Days.ToList();
             CmbDay.SelectedValuePath = "Id";
             CmbDay.DisplayMemberPath = "DayName";
 
-            CmbClass.ItemsSource = DbConnect.entObj.Class.ToList();
+            CmbClass.ItemsSource = DbConnect.entObj.Classes.ToList();
             CmbClass.SelectedValuePath = "Id";
             CmbClass.DisplayMemberPath = "ClassNumber";
+
+            CmbTeacher.ItemsSource = DbConnect.entObj.Users.ToList();
+            CmbTeacher.SelectedValuePath = "Id";
+            CmbTeacher.DisplayMemberPath = "Name";
+
+            this.lessons = selectedLessons;
+
+            if (lessons != null)
+            {
+                TxbCabinet.Text = Convert.ToString(lessons.Cabinet);
+                TxbLesson.Text = lessons.Lesson;
+                CmbTeacher.SelectedValue = lessons.IdUser;
+                TxbNumber.Text = Convert.ToString(lessons.NumberOfLesson);
+                CmbClass.SelectedValue = lessons.IdClass;
+                CmbDay.SelectedValue = lessons.IdDay;
+            }         
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -54,7 +59,7 @@ namespace LessonScheduler.Pages
                 lessons.NumberOfLesson = Convert.ToInt32(TxbNumber.Text);
                 lessons.Lesson = TxbLesson.Text;
                 lessons.Cabinet = Convert.ToInt32(TxbCabinet.Text);
-                lessons.IdTeacher = Convert.ToInt32(TxbTeacher.Text);
+                lessons.IdUser = Convert.ToInt32(CmbTeacher.SelectedIndex + 1);
                 lessons.IdClass = Convert.ToInt32(CmbClass.SelectedIndex + 1);
                 lessons.IdDay = Convert.ToInt32(CmbDay.SelectedIndex + 1);
 

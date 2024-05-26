@@ -55,7 +55,7 @@
                             <Image Source="/Images/user.png" Margin="5" Height="25"/>
                             <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Учитель</TextBlock>
                         </StackPanel>
-                        <TextBox Name="TxbTeacher" Style="{StaticResource EditStyleTextBox}"/>
+                        <ComboBox Name="CmbTeacher" Style="{StaticResource EditStyleComboBox}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="10" >

@@ -11,16 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LessonScheduler.Windows
+namespace LessonScheduler.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddUserWindow.xaml
+    /// Логика взаимодействия для AddUserPage.xaml
     /// </summary>
-    public partial class AddUserWindow : Window
+    public partial class AddUserPage : Page
     {
-        public AddUserWindow()
+        public AddUserPage()
         {
             InitializeComponent();
 
@@ -89,7 +90,7 @@ namespace LessonScheduler.Windows
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Information);
 
-                        this.Close();
+                        FrameApp.frmObj.Navigate(new AdminPage());
                     }
                     catch (Exception ex)
                     {
@@ -100,6 +101,11 @@ namespace LessonScheduler.Windows
                     }
                 }
             }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            FrameApp.frmObj.Navigate(new AdminPage());
         }
     }
 }

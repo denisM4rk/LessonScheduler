@@ -1,5 +1,4 @@
 ﻿using LessonScheduler.AppFiles;
-using LessonScheduler.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +11,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LessonScheduler.Windows
+namespace LessonScheduler.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для EditUserWindow.xaml
+    /// Логика взаимодействия для EditUserPage.xaml
     /// </summary>
-    public partial class EditUserWindow : Window
+    public partial class EditUserPage : Page
     {
         private Users users;
-        public EditUserWindow(Users selectedUsers)
+        public EditUserPage(Users selectedUsers)
         {
             InitializeComponent();
-            AdminPage.a = 1;
+
+            CmbRole.ItemsSource = DbConnect.entObj.Role.ToList();
+            CmbRole.SelectedValuePath = "Id";
+            CmbRole.DisplayMemberPath = "Name";
 
             this.users = selectedUsers;
 
@@ -34,12 +37,8 @@ namespace LessonScheduler.Windows
                 TxbLogin.Text = Convert.ToString(users.Login);
                 TxbName.Text = Convert.ToString(users.Name);
                 PsbPassword.Password = Convert.ToString(users.Password);
-                users.IdRole = CmbRole.SelectedIndex + 1;
+                CmbRole.SelectedValue = users.IdRole;
             }
-
-            CmbRole.ItemsSource = DbConnect.entObj.Role.ToList();
-            CmbRole.SelectedValuePath = "Id";
-            CmbRole.DisplayMemberPath = "Name";
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -49,7 +48,7 @@ namespace LessonScheduler.Windows
                 users.Name = TxbName.Text;
                 users.Login = TxbLogin.Text;
                 users.Password = PsbPassword.Password;
-                users.IdRole = Convert.ToInt32(CmbRole.SelectedIndex+1);
+                users.IdRole = Convert.ToInt32(CmbRole.SelectedIndex + 1);
 
                 DbConnect.entObj.SaveChanges();
                 DbConnect.entObj.Users.ToList();
@@ -58,9 +57,14 @@ namespace LessonScheduler.Windows
                                 "Уведомление",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-                
-                this.Close();
+
+                FrameApp.frmObj.Navigate(new AdminPage());
             }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            FrameApp.frmObj.Navigate(new AdminPage());
         }
     }
 }

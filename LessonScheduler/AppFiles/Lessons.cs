@@ -17,21 +17,21 @@ namespace LessonScheduler.AppFiles
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lessons()
         {
-            this.LessonsPlans = new HashSet<LessonsPlans>();
+            this.Plans = new HashSet<Plans>();
         }
     
         public int Id { get; set; }
         public int NumberOfLesson { get; set; }
         public string Lesson { get; set; }
         public int Cabinet { get; set; }
-        public int IdTeacher { get; set; }
+        public int IdUser { get; set; }
         public int IdClass { get; set; }
         public int IdDay { get; set; }
     
-        public virtual Class Class { get; set; }
+        public virtual Classes Classes { get; set; }
         public virtual Days Days { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonsPlans> LessonsPlans { get; set; }
+        public virtual ICollection<Plans> Plans { get; set; }
     }
 }

@@ -80,6 +80,20 @@
 
             <Separator/>
 
+            <Button Name="BtnDeletePlan" Click="BtnDeletePlan_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Удалить план занятия
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/delete.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Уд. план</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
 
             <TextBlock Name="TxbIdUser" Visibility="Hidden" Width="auto" Height="auto"></TextBlock>
         </ToolBar>
@@ -193,7 +207,7 @@
                             </DataGrid>
                         </GroupBox>
 
-                        <GroupBox Header="Пятница" Grid.Column="4"  Margin="5">
+                        <GroupBox Header="Пятница" Grid.Column="4" Margin="5">
                             <GroupBox.HeaderTemplate>
                                 <DataTemplate>
                                     <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
@@ -221,16 +235,53 @@
             </TabItem>
             
             <TabItem Name="TbPlans" Header="Мои планы">
-                <DataGrid Name="GridPlans" SelectionChanged="GridPlans_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn FontSize="15" Header="Предмет" Width="auto" Binding="{Binding Lessons.Lesson}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Тема занятия" Width="auto" Binding="{Binding LessonTopic}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Тип занятия" Width="auto" Binding="{Binding LessonType}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Материалы" Width="auto" Binding="{Binding LessonMaterials}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Деятельность учеников" Width="auto" Binding="{Binding StudentsActivity}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Деятельность учителя" Width="auto" Binding="{Binding TeacherActivity}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="План" Grid.Column="0" Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            
+                            <DataGrid Name="GridPlans" SelectionChanged="GridPlans_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn FontSize="15" Header="Предмет" Width="auto" Binding="{Binding Lessons.Lesson}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Тема занятия" Width="auto" Binding="{Binding LessonTopic}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Тип занятия" Width="auto" Binding="{Binding LessonType}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Материалы" Width="auto" Binding="{Binding LessonDate}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+
+                        <GroupBox Header="Этапы" Grid.Column="1" Margin="5">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="4" BorderThickness="2" Background="#25A0DA">
+                                        <Label Content="{Binding}" HorizontalAlignment="Stretch"  Background="#25A0DA" Foreground="White" FontWeight="SemiBold"></Label>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+
+                            <DataGrid Grid.Column="1" Name="GridStages" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn FontSize="15" Header="Номер этапа" Width="auto" Binding="{Binding StageNumber}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Длительность" Width="auto" Binding="{Binding TimeDuration}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Материал" Width="auto" Binding="{Binding Material}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Активность учителя" Width="auto" Binding="{Binding TeacherActivity}"></DataGridTextColumn>
+                                    <DataGridTextColumn FontSize="15" Header="Активность учеников" Width="auto" Binding="{Binding StudentActivity}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>

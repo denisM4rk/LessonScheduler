@@ -1,5 +1,4 @@
 ﻿using LessonScheduler.AppFiles;
-using LessonScheduler.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,40 +23,18 @@ namespace LessonScheduler.Pages
     public partial class AdminPage : Page
     {
         private Users selectedUsers;
-        private LessonsPlans selectedLessonsPlans;
+        private Plans selectedPlans;
         public AdminPage()
         {
             InitializeComponent();
 
             GridUsers.ItemsSource = DbConnect.entObj.Users.ToList();
-            GridLessonsPlans.ItemsSource = DbConnect.entObj.LessonsPlans.ToList();
-        }
-
-        // метод обновления таблиц
-        static public int a = 0;
-        private void TableWindowUpdate()
-        {
-            while (true)
-            {
-                if (a != 0)
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        GridUsers.ItemsSource = DbConnect.entObj.Users.ToList();
-                    });
-
-                    a = 0;
-                }
-            }
+            GridPlans.ItemsSource = DbConnect.entObj.Plans.ToList();
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedUsers != null)
-            {
-                EditUserWindow editWindow = new EditUserWindow(selectedUsers);
-                editWindow.Show();
-            }
+            FrameApp.frmObj.Navigate(new EditUserPage(selectedUsers));
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -69,10 +46,9 @@ namespace LessonScheduler.Pages
         {
             if (GridUsers.SelectedItem != null)
             {
-                AddUserWindow addWindow = new AddUserWindow();
-                addWindow.Show();
+                FrameApp.frmObj.Navigate(new AddUserPage());
             }
-            else if (GridLessonsPlans.SelectedItem != null)
+            else if (GridPlans.SelectedItem != null)
             {
                 BtnAdd.IsEnabled = true;
             }
@@ -112,15 +88,15 @@ namespace LessonScheduler.Pages
                 }
             }
 
-            if (GridLessonsPlans.SelectedItem != null)
+            if (GridPlans.SelectedItem != null)
             {
-                var filesForRemoving = GridLessonsPlans.SelectedItems.Cast<LessonsPlans>().ToList();
+                var filesForRemoving = GridPlans.SelectedItems.Cast<Plans>().ToList();
                 try
                 {
                     var result = MessageBox.Show("Вы уверены?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
-                        DbConnect.entObj.LessonsPlans.RemoveRange(filesForRemoving);
+                        DbConnect.entObj.Plans.RemoveRange(filesForRemoving);
                         DbConnect.entObj.SaveChanges();
 
                         MessageBox.Show("Данные удалены!",
@@ -128,11 +104,11 @@ namespace LessonScheduler.Pages
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Information);
 
-                        GridLessonsPlans.ItemsSource = DbConnect.entObj.LessonsPlans.ToList();
+                        GridPlans.ItemsSource = DbConnect.entObj.Plans.ToList();
                     }
                     else
                     {
-                        GridLessonsPlans.ItemsSource = DbConnect.entObj.LessonsPlans.ToList();
+                        GridPlans.ItemsSource = DbConnect.entObj.Plans.ToList();
                     }
                 }
                 catch (Exception ex)
@@ -150,16 +126,6 @@ namespace LessonScheduler.Pages
             selectedUsers = (Users)GridUsers.SelectedItem;
         }
 
-        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            new Thread(TableWindowUpdate).Start();
-
-            MessageBox.Show("Данные обновлены!",
-                            "Уведомление",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-        }
-
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
             FrameApp.frmObj.Navigate(new WelcomePage());
@@ -167,7 +133,7 @@ namespace LessonScheduler.Pages
 
         private void GridLessonsPlans_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedLessonsPlans = (LessonsPlans)GridLessonsPlans.SelectedItem;
+            selectedPlans = (Plans)GridPlans.SelectedItem;
         }
     }
 }

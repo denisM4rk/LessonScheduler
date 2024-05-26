@@ -1,5 +1,4 @@
 ﻿using LessonScheduler.AppFiles;
-using LessonScheduler.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +32,14 @@ namespace LessonScheduler.Pages
 
             CmbClass.SelectedValuePath = "Id";
             CmbClass.DisplayMemberPath = "ClassNumber";
-            CmbClass.ItemsSource = DbConnect.entObj.Class.ToList();
+            CmbClass.ItemsSource = DbConnect.entObj.Classes.ToList();
 
-            GridPlans.ItemsSource = DbConnect.entObj.Plans.Where(p => p.LessonsPlans.Any(l => l.Lessons.IdTeacher == IdUser)).ToList();
+            GridPlans.ItemsSource = DbConnect.entObj.Plans.Where(l => l.Lessons.IdUser == IdUser).ToList();
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            FrameApp.frmObj.GoBack();
+            FrameApp.frmObj.Navigate(new WelcomePage());
         }
 
         private void CmbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,7 +55,7 @@ namespace LessonScheduler.Pages
         {
             int IdUser = int.Parse(TxbIdUser.Text);
 
-            var userSubjects = DbConnect.entObj.Lessons.FirstOrDefault(x => x.IdTeacher == selectedLessons.IdTeacher && x.IdTeacher == IdUser);
+            var userSubjects = DbConnect.entObj.Lessons.FirstOrDefault(x => x.IdUser == selectedLessons.IdUser && x.IdUser == IdUser);
 
             if (userSubjects == null)
             {
@@ -89,7 +88,7 @@ namespace LessonScheduler.Pages
         {
             int IdUser = int.Parse(TxbIdUser.Text);
 
-            var userSubjects = DbConnect.entObj.Lessons.FirstOrDefault(x => x.IdTeacher == selectedLessons.IdTeacher && x.IdTeacher == IdUser);
+            var userSubjects = DbConnect.entObj.Lessons.FirstOrDefault(x => x.IdUser == selectedLessons.IdUser && x.IdUser == IdUser);
 
             if (userSubjects == null)
             {
@@ -100,10 +99,7 @@ namespace LessonScheduler.Pages
             }
             else
             {
-                DataGridRow row = sender as DataGridRow;
-
-                PlanWindow planWindow = new PlanWindow(selectedLessons);
-                planWindow.Show();
+                FrameApp.frmObj.Navigate(new NewPlanPage(selectedLessons, IdUser));
             }
         }
 
@@ -126,7 +122,7 @@ namespace LessonScheduler.Pages
         {
             int IdUser = int.Parse(TxbIdUser.Text);
 
-            var userSubjects = DbConnect.entObj.Lessons.FirstOrDefault(x => x.IdTeacher == selectedLessons.IdTeacher && x.IdTeacher == IdUser);
+            var userSubjects = DbConnect.entObj.Lessons.FirstOrDefault(x => x.IdUser == selectedLessons.IdUser && x.IdUser == IdUser);
 
             if (userSubjects == null)
             {
@@ -137,21 +133,65 @@ namespace LessonScheduler.Pages
             }
             else
             {
-                DataGridRow row = sender as DataGridRow;
-
-                PlanWindow planWindow = new PlanWindow(selectedLessons);
-                planWindow.Show();
+                FrameApp.frmObj.Navigate(new NewPlanPage(selectedLessons, IdUser));
             }
         }
-
         private void GridPlans_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedPlans = (Plans)GridPlans.SelectedItem;
+
+            if (selectedPlans != null)
+            {
+               GridStages.ItemsSource = DbConnect.entObj.Stages.Where(s => s.IdPlan == selectedPlans.Id).ToList();
+            }
         }
 
         private void BtnEditPlan_Click(object sender, RoutedEventArgs e)
         {
-            FrameApp.frmObj.Navigate(new EditPlanPage(selectedPlans));
+            int IdUser = int.Parse(TxbIdUser.Text);
+            FrameApp.frmObj.Navigate(new EditPlanPage(selectedPlans, IdUser));
+        }
+
+        private void BtnDeletePlan_Click(object sender, RoutedEventArgs e)
+        {
+            if (GridPlans.SelectedItem != null)
+            {
+                var plansForRemoving = GridPlans.SelectedItems.Cast<Plans>().ToList();
+                var stages = DbConnect.entObj.Stages.Where(s => s.IdPlan == selectedPlans.Id).ToList();
+                try
+                {
+                    var result = MessageBox.Show("Вы уверены?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        DbConnect.entObj.Plans.RemoveRange(plansForRemoving);
+                        foreach (var stage in stages)
+                        {
+                            DbConnect.entObj.Stages.Remove(stage);
+                        }
+                        DbConnect.entObj.SaveChanges();
+
+                        MessageBox.Show("Данные удалены!",
+                                        "Уведомление",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Information);
+
+                        GridPlans.ItemsSource = DbConnect.entObj.Plans.ToList();
+                        GridStages.Items.Clear();
+                    }
+                    else
+                    {
+                        GridPlans.ItemsSource = DbConnect.entObj.Plans.ToList();
+                        GridStages.Items.Clear();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Критический сбой в работе приложения: " + ex.Message.ToString(),
+                                    "Уведомление",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+                }
+            }
         }
     }
 }

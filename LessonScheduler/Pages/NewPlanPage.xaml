@@ -1,4 +1,4 @@
-﻿<Page x:Class="LessonScheduler.Pages.EditPlanPage"
+﻿<Page x:Class="LessonScheduler.Pages.NewPlanPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,22 +6,17 @@
       xmlns:local="clr-namespace:LessonScheduler.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Редактировать план занятия">
+      Title="Создание плана занятия">
 
     <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <ScrollViewer Grid.Column="0">
+        <ScrollViewer>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical" Margin="10">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/sheet.png" Margin="5" Height="25"/>
                             <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="200">Тема занятия</TextBlock>
-                            <TextBlock Name="TxbIdUser" HorizontalAlignment="Left" Width="0"></TextBlock>
+                            <TextBlock Name="TxbIdUser" Visibility="Hidden" HorizontalAlignment="Left" Width="0"></TextBlock>
                         </StackPanel>
                         <TextBox Name="TxbTopic" Style="{StaticResource EditStyleTextBox}"></TextBox>
                     </StackPanel>
@@ -49,6 +44,7 @@
                         </StackPanel>
                         <DatePicker Name="DateLesson"></DatePicker>
                     </StackPanel>
+
                     <StackPanel Orientation="Vertical" Margin="10">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/class.png" Margin="5" Height="25"/>
@@ -58,22 +54,10 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button Name="BtnStages" VerticalAlignment="Bottom" Click="BtnStages_Click" Style="{StaticResource Button}">Этапы занятия</Button>
-                <Button Name="BtnEdit" VerticalAlignment="Bottom" Click="BtnEdit_Click" Style="{StaticResource Button}">Редактировать</Button>
+                <Button Name="BtnCreate" VerticalAlignment="Bottom" Click="BtnCreate_Click" Style="{StaticResource Button}">Создать</Button>
                 <Button Name="BtnBack" VerticalAlignment="Bottom" Click="BtnBack_Click" Style="{StaticResource Button}">Назад</Button>
-            </StackPanel>
-        </ScrollViewer>
 
-        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <DataGrid Name="GridStages" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="15" Header="Номер этапа" Width="auto" Binding="{Binding StageNumber}"></DataGridTextColumn>
-                    <DataGridTextColumn FontSize="15" Header="Длительность" Width="auto" Binding="{Binding TimeDuration}"></DataGridTextColumn>
-                    <DataGridTextColumn FontSize="15" Header="Материал" Width="auto" Binding="{Binding Material}"></DataGridTextColumn>
-                    <DataGridTextColumn FontSize="15" Header="Активность учителя" Width="auto" Binding="{Binding TeacherActivity}"></DataGridTextColumn>
-                    <DataGridTextColumn FontSize="15" Header="Активность учеников" Width="auto" Binding="{Binding StudentActivity}"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Page>

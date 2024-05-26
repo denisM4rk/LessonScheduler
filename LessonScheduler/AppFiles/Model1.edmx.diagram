@@ -5,19 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="26a3ab64f80440f3b8977725a93ed441" Name="Diagram1">
-        <EntityTypeShape EntityType="DbSchedulerModel.Class" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="DbSchedulerModel.Classes" Width="1.5" PointX="3" PointY="7.25" />
         <EntityTypeShape EntityType="DbSchedulerModel.Days" Width="1.5" PointX="3" PointY="4.875" />
         <EntityTypeShape EntityType="DbSchedulerModel.Lessons" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="DbSchedulerModel.LessonsPlans" Width="1.5" PointX="7.5" PointY="1.5" />
-        <EntityTypeShape EntityType="DbSchedulerModel.Plans" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="DbSchedulerModel.Plans" Width="1.5" PointX="7.5" PointY="1.375" />
         <EntityTypeShape EntityType="DbSchedulerModel.Role" Width="1.5" PointX="0.75" PointY="1.75" />
-        <EntityTypeShape EntityType="DbSchedulerModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DbSchedulerModel.Stages" Width="1.5" PointX="9.75" PointY="1.25" />
+        <EntityTypeShape EntityType="DbSchedulerModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" />
         <EntityTypeShape EntityType="DbSchedulerModel.Users" Width="1.5" PointX="3" PointY="1.375" />
         <AssociationConnector Association="DbSchedulerModel.FK_Lessons_Class" />
         <AssociationConnector Association="DbSchedulerModel.FK_Lessons_Days" />
         <AssociationConnector Association="DbSchedulerModel.FK_Lessons_Users" />
-        <AssociationConnector Association="DbSchedulerModel.FK_LessonsPlans_Lessons" />
-        <AssociationConnector Association="DbSchedulerModel.FK_LessonsPlans_Plans" />
+        <AssociationConnector Association="DbSchedulerModel.FK_Plans_Lessons" />
+        <AssociationConnector Association="DbSchedulerModel.FK_Stages_Plans" />
         <AssociationConnector Association="DbSchedulerModel.FK_Users_Role" />
       </Diagram>
     </edmx:Diagrams>

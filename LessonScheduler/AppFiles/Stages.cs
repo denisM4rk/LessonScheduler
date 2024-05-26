@@ -12,18 +12,16 @@ namespace LessonScheduler.AppFiles
     using System;
     using System.Collections.Generic;
     
-    public partial class Class
+    public partial class Stages
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Class()
-        {
-            this.Lessons = new HashSet<Lessons>();
-        }
-    
         public int Id { get; set; }
-        public string ClassNumber { get; set; }
+        public Nullable<int> StageNumber { get; set; }
+        public Nullable<decimal> TimeDuration { get; set; }
+        public string Material { get; set; }
+        public string TeacherActivity { get; set; }
+        public string StudentActivity { get; set; }
+        public Nullable<int> IdPlan { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lessons> Lessons { get; set; }
+        public virtual Plans Plans { get; set; }
     }
 }

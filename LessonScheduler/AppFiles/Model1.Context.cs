@@ -25,12 +25,12 @@ namespace LessonScheduler.AppFiles
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Class> Class { get; set; }
+        public virtual DbSet<Classes> Classes { get; set; }
         public virtual DbSet<Days> Days { get; set; }
         public virtual DbSet<Lessons> Lessons { get; set; }
-        public virtual DbSet<LessonsPlans> LessonsPlans { get; set; }
         public virtual DbSet<Plans> Plans { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Stages> Stages { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }

@@ -28,20 +28,6 @@
                     <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Домой</TextBlock>
                 </StackPanel>
             </Button>
-
-            <Separator/>
-
-            <Button Name="BtnUpdate" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5" Click="BtnUpdate_Click">
-                <Button.ToolTip>
-                    <ToolTip>
-                        Обновить данные
-                    </ToolTip>
-                </Button.ToolTip>
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <Image Height="20" VerticalAlignment="Center" Source="/Images/update.png"></Image>
-                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Обновить</TextBlock>
-                </StackPanel>
-            </Button>
             
             <Separator/>
 
@@ -102,15 +88,12 @@
             </TabItem>
             
             <TabItem Header="Все планы на занятия">
-                <DataGrid Name="GridLessonsPlans" SelectionChanged="GridLessonsPlans_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid Name="GridPlans" SelectionChanged="GridLessonsPlans_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn FontSize="15" Header="Идентификатор учителя" Width="auto" Binding="{Binding Lessons.IdTeacher}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Идентификатор учителя" Width="auto" Binding="{Binding Lessons.IdUser}"></DataGridTextColumn>
                         <DataGridTextColumn FontSize="15" Header="Предмет" Width="auto" Binding="{Binding Lessons.Lesson}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Тема занятия" Width="auto" Binding="{Binding Plans.LessonTopic}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Тип занятия" Width="auto" Binding="{Binding Plans.LessonType}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Материалы" Width="auto" Binding="{Binding Plans.LessonMaterials}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Деятельность учеников" Width="auto" Binding="{Binding Plans.StudentsActivity}"></DataGridTextColumn>
-                        <DataGridTextColumn FontSize="15" Header="Деятельность учителя" Width="auto" Binding="{Binding Plans.TeacherActivity}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Тема занятия" Width="auto" Binding="{Binding LessonTopic}"></DataGridTextColumn>
+                        <DataGridTextColumn FontSize="15" Header="Дата занятия" Width="auto" Binding="{Binding LessonDate}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
