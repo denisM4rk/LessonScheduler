@@ -107,9 +107,6 @@
     <Compile Include="Pages\EditPlanPage.xaml.cs">
       <DependentUpon>EditPlanPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EditStagePage.xaml.cs">
-      <DependentUpon>EditStagePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\EditUserPage.xaml.cs">
       <DependentUpon>EditUserPage.xaml</DependentUpon>
     </Compile>
@@ -175,10 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EditPlanPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\EditStagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
