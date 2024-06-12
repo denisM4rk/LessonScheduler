@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -64,7 +64,7 @@
             </Button>
 
             <Separator/>
-            
+
             <Button Name="BtnEditPlan" Click="BtnEditPlan_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
                 <Button.ToolTip>
                     <ToolTip>
@@ -90,6 +90,36 @@
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Image Height="20" VerticalAlignment="Center" Source="/Images/delete.png"></Image>
                     <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Уд. план</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+
+            <Button Name="BtnPDF" Click="BtnPDF_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Конвертировать план в PDF
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/sheet.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Экспорт плана</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator/>
+
+            <Button Name="BtnSchedulePDF" Click="BtnSchedulePDF_Click" BorderBrush="Black" Width="auto" Height="auto" BorderThickness="1" Margin="5">
+                <Button.ToolTip>
+                    <ToolTip>
+                        Конвертировать расписание в PDF
+                    </ToolTip>
+                </Button.ToolTip>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Image Height="20" VerticalAlignment="Center" Source="/Images/calendar.png"></Image>
+                    <TextBlock Margin="10" VerticalAlignment="Center" Height="auto" FontSize="15">Экспорт расписания</TextBlock>
                 </StackPanel>
             </Button>
 
