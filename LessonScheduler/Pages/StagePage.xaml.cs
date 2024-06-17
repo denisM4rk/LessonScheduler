@@ -68,8 +68,8 @@ namespace LessonScheduler.Pages
                     StageNumber = Convert.ToInt32(TxbNumber.Text),
                     TimeDuration = Convert.ToDecimal(TxbDuration.Text),
                     Material = TxbMaterial.Text,
-                    TeacherActivity = TxbTeacher.Text,
-                    StudentActivity = TxbStudent.Text,
+                    TeacherActivity = CmbTeacher.Text,
+                    StudentActivity = CmbStudent.Text,
                     IdPlan = CmbPlan.SelectedIndex + 1
                 };
 

@@ -69,7 +69,16 @@
                             <Image Source="/Images/class.png" Margin="5" Height="25"/>
                             <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="auto">Деятельность учителя</TextBlock>
                         </StackPanel>
-                        <TextBox Width="250" Style="{StaticResource EditStyleTextBox}" Name="TxbTeacher"></TextBox>
+                        <ComboBox Width="250" Style="{StaticResource EditStyleComboBox}" Name="CmbTeacher">
+                            <ComboBoxItem>Проведение вводного разговора о теме занятия</ComboBoxItem>
+                            <ComboBoxItem>Объяснение материала ученикам</ComboBoxItem>
+                            <ComboBoxItem>Демонстрация примеров</ComboBoxItem>
+                            <ComboBoxItem>Организация групповой или индивидуальной работы учеников</ComboBoxItem>
+                            <ComboBoxItem>Раздача заданий и учебных материалов</ComboBoxItem>
+                            <ComboBoxItem>Проведение обсуждения результатов выполненных заданий</ComboBoxItem>
+                            <ComboBoxItem>Контроль выполнения заданий и помощь ученикам при необходимости</ComboBoxItem>
+                            <ComboBoxItem>Подведение итогов урока и объяснение дальнейших шагов</ComboBoxItem>
+                        </ComboBox>
                     </StackPanel>
                     
                     <StackPanel Orientation="Vertical" Margin="10">
@@ -77,7 +86,16 @@
                             <Image Source="/Images/class2.png" Margin="5" Height="25"/>
                             <TextBlock Style="{StaticResource EditStyleTextBlock}" HorizontalAlignment="Left" Width="auto">Деятельность ученика</TextBlock>
                         </StackPanel>
-                        <TextBox Width="250" Style="{StaticResource EditStyleTextBox}" Name="TxbStudent"></TextBox>
+                        <ComboBox Width="250" Style="{StaticResource EditStyleComboBox}" Name="CmbStudent">
+                            <ComboBoxItem>Активное участие в обсуждении темы урока</ComboBoxItem>
+                            <ComboBoxItem>Постановка вопросов учителю</ComboBoxItem>
+                            <ComboBoxItem>Выполнение заданий и учебных упражнений</ComboBoxItem>
+                            <ComboBoxItem>Работа в группах или парам над проектами или заданиями</ComboBoxItem>
+                            <ComboBoxItem>Подготовка к презентации или выступлению перед классом</ComboBoxItem>
+                            <ComboBoxItem>Самостоятельное изучение материала на дом</ComboBoxItem>
+                            <ComboBoxItem>Обмен мнениями и идеями</ComboBoxItem>
+                            <ComboBoxItem>Рефлексия выполненной работы и анализ ошибок</ComboBoxItem>
+                        </ComboBox>
                     </StackPanel>
                 </StackPanel>
 

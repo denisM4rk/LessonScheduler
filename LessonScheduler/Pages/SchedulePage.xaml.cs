@@ -233,11 +233,20 @@ namespace LessonScheduler.Pages
 
                 foreach (var row in GridStages.ItemsSource)
                 {
-                    table.AddCell(((Stages)row).StageNumber.ToString());
-                    table.AddCell(((Stages)row).TimeDuration.ToString());
-                    table.AddCell(((Stages)row).Material);
-                    table.AddCell(((Stages)row).TeacherActivity);
-                    table.AddCell(((Stages)row).StudentActivity);
+                    PdfPCell cell = new PdfPCell(new Phrase(((Stages)row).StageNumber.ToString(), font));
+                    table.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Stages)row).TimeDuration.ToString(), font));
+                    table.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Stages)row).Material.ToString(), font));
+                    table.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Stages)row).TeacherActivity.ToString(), font));
+                    table.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Stages)row).StudentActivity.ToString(), font));
+                    table.AddCell(cell);
                 }
                 document.Add(table);
 
@@ -280,10 +289,11 @@ namespace LessonScheduler.Pages
                 header1.SpacingAfter = 10f;
                 document.Add(header1);
 
-                PdfPTable mondayTable = new PdfPTable(3);
+                PdfPTable mondayTable = new PdfPTable(4);
                 mondayTable.AddCell(new PdfPCell(new Phrase("№", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 mondayTable.AddCell(new PdfPCell(new Phrase("Урок", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 mondayTable.AddCell(new PdfPCell(new Phrase("Кабинет", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
+                mondayTable.AddCell(new PdfPCell(new Phrase("Учитель", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
 
                 foreach (var row in GridMonday.ItemsSource)
                 {
@@ -294,6 +304,9 @@ namespace LessonScheduler.Pages
                     mondayTable.AddCell(cell);
 
                     cell = new PdfPCell(new Phrase(((Lessons)row).Cabinet.ToString(), font));
+                    mondayTable.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Lessons)row).Users.Name.ToString(), font));
                     mondayTable.AddCell(cell);
                 }
 
@@ -308,10 +321,11 @@ namespace LessonScheduler.Pages
                 header2.SpacingAfter = 10f;
                 document.Add(header2);
 
-                PdfPTable tuesdayTable = new PdfPTable(3);
+                PdfPTable tuesdayTable = new PdfPTable(4);
                 tuesdayTable.AddCell(new PdfPCell(new Phrase("№", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 tuesdayTable.AddCell(new PdfPCell(new Phrase("Урок", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 tuesdayTable.AddCell(new PdfPCell(new Phrase("Кабинет", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
+                tuesdayTable.AddCell(new PdfPCell(new Phrase("Учитель", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
 
                 foreach (var row in GridTuesday.ItemsSource)
                 {
@@ -322,6 +336,9 @@ namespace LessonScheduler.Pages
                     tuesdayTable.AddCell(cell);
 
                     cell = new PdfPCell(new Phrase(((Lessons)row).Cabinet.ToString(), font));
+                    tuesdayTable.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Lessons)row).Users.Name.ToString(), font));
                     tuesdayTable.AddCell(cell);
                 }
 
@@ -336,10 +353,11 @@ namespace LessonScheduler.Pages
                 header3.SpacingAfter = 10f;
                 document.Add(header3);
 
-                PdfPTable wednesdayTable = new PdfPTable(3);
+                PdfPTable wednesdayTable = new PdfPTable(4);
                 wednesdayTable.AddCell(new PdfPCell(new Phrase("№", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 wednesdayTable.AddCell(new PdfPCell(new Phrase("Урок", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 wednesdayTable.AddCell(new PdfPCell(new Phrase("Кабинет", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
+                wednesdayTable.AddCell(new PdfPCell(new Phrase("Учитель", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
 
                 foreach (var row in GridWednesday.ItemsSource)
                 {
@@ -350,6 +368,9 @@ namespace LessonScheduler.Pages
                     wednesdayTable.AddCell(cell);
 
                     cell = new PdfPCell(new Phrase(((Lessons)row).Cabinet.ToString(), font));
+                    wednesdayTable.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Lessons)row).Users.Name.ToString(), font));
                     wednesdayTable.AddCell(cell);
                 }
 
@@ -364,10 +385,11 @@ namespace LessonScheduler.Pages
                 header4.SpacingAfter = 10f;
                 document.Add(header4);
 
-                PdfPTable thursdayTable = new PdfPTable(3);
+                PdfPTable thursdayTable = new PdfPTable(4);
                 thursdayTable.AddCell(new PdfPCell(new Phrase("№", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 thursdayTable.AddCell(new PdfPCell(new Phrase("Урок", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 thursdayTable.AddCell(new PdfPCell(new Phrase("Кабинет", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
+                thursdayTable.AddCell(new PdfPCell(new Phrase("Учитель", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
 
                 foreach (var row in GridThursday.ItemsSource)
                 {
@@ -378,6 +400,9 @@ namespace LessonScheduler.Pages
                     thursdayTable.AddCell(cell);
 
                     cell = new PdfPCell(new Phrase(((Lessons)row).Cabinet.ToString(), font));
+                    thursdayTable.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Lessons)row).Users.Name.ToString(), font));
                     thursdayTable.AddCell(cell);
                 }
 
@@ -392,10 +417,11 @@ namespace LessonScheduler.Pages
                 header5.SpacingAfter = 10f;
                 document.Add(header5);
 
-                PdfPTable fridayTable = new PdfPTable(3);
+                PdfPTable fridayTable = new PdfPTable(4);
                 fridayTable.AddCell(new PdfPCell(new Phrase("№", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 fridayTable.AddCell(new PdfPCell(new Phrase("Урок", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
                 fridayTable.AddCell(new PdfPCell(new Phrase("Кабинет", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
+                fridayTable.AddCell(new PdfPCell(new Phrase("Учитель", font)) { BackgroundColor = new BaseColor(240, 240, 240) });
 
                 foreach (var row in GridFriday.ItemsSource)
                 {
@@ -406,6 +432,9 @@ namespace LessonScheduler.Pages
                     fridayTable.AddCell(cell);
 
                     cell = new PdfPCell(new Phrase(((Lessons)row).Cabinet.ToString(), font));
+                    fridayTable.AddCell(cell);
+
+                    cell = new PdfPCell(new Phrase(((Lessons)row).Users.Name.ToString(), font));
                     fridayTable.AddCell(cell);
                 }
 
